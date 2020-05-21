@@ -6,8 +6,9 @@ const modals = () => {
               modal = document.querySelector(modalSelector),
               close = document.querySelector(closeSelector),
               windows = document.querySelectorAll('[data-modal]'),
-              scroll = calcScroll();
-            //   present = document.querySelector('.fixed-gift');
+              scroll = calcScroll(),
+              present = document.querySelector('.fixed-gift');
+              
         trigger.forEach(item => {
             item.addEventListener('click', (e) => {
                 if (e.target) {
@@ -28,11 +29,11 @@ const modals = () => {
                 modal.style.display = "block";
                 document.body.style.overflow = "hidden";
                 document.body.style.marginRight = `${scroll}px`;
-                // present.style.marginRight = `${scroll}px`;
+                present.style.marginRight = `${scroll}px`;
             });
         });
 
-        close.addEventListener('click', () => {
+        function closeModal() {
             windows.forEach(item => {
                 item.style.display= 'none';
             });
@@ -40,18 +41,16 @@ const modals = () => {
             modal.style.display = "none";
             document.body.style.overflow = "";
             document.body.style.marginRight = `0px`;
-            // present.style.marginRight = `0px`;
+            present.style.marginRight = `0px`;
+        }
+
+        close.addEventListener('click', () => {
+            closeModal();
         });
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                windows.forEach(item => {
-                    item.style.display= 'none';
-                });
-
-                modal.style.display = "none";
-                document.body.style.overflow = "";
-                document.body.style.marginRight = `0px`;
+                closeModal();
             }
         });
     }
@@ -104,7 +103,7 @@ const modals = () => {
     bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
     bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
     openByScroll('.fixed-gift');
-    // showModalByTime('.popup-consultation', 50000);
+    showModalByTime('.popup-consultation', 50000);
 };
 
 export default modals;
