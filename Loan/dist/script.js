@@ -3127,24 +3127,27 @@ function (_Slider) {
   }, {
     key: "nextSlide",
     value: function nextSlide() {
-      if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
-        this.container.appendChild(this.slides[0]); // slide
+      for (var i = this.slides.length - 1; i > 0; i--) {
+        if (this.slides[i].tagName !== "BUTTON") {
+          var active = this.slides[0];
+          this.container.insertBefore(active, this.slides[i]);
+          this.decorizeSlides();
+          break;
+        }
+      } // if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
+      //     this.container.appendChild(this.slides[0]); // slide
+      //     this.container.appendChild(this.slides[1]); // btn
+      //     this.container.appendChild(this.slides[2]); // btn
+      //     this.decorizeSlides();
+      // } else if (this.slides[1].tagName == "BUTTON") {
+      //     this.container.appendChild(this.slides[0]); // slide
+      //     this.container.appendChild(this.slides[1]); // btn
+      //     this.decorizeSlides();
+      // } else {
+      //     this.container.appendChild(this.slides[0]);
+      //     this.decorizeSlides();
+      // }
 
-        this.container.appendChild(this.slides[1]); // btn
-
-        this.container.appendChild(this.slides[2]); // btn
-
-        this.decorizeSlides();
-      } else if (this.slides[1].tagName == "BUTTON") {
-        this.container.appendChild(this.slides[0]); // slide
-
-        this.container.appendChild(this.slides[1]); // btn
-
-        this.decorizeSlides();
-      } else {
-        this.container.appendChild(this.slides[0]);
-        this.decorizeSlides();
-      }
     }
   }, {
     key: "bindTriggers",
@@ -3178,9 +3181,17 @@ function (_Slider) {
       this.decorizeSlides();
 
       if (this.autoplay) {
-        setInterval(function () {
+        var paused = setInterval(function () {
           return _this3.nextSlide();
         }, 5000);
+        this.slides[0].parentNode.addEventListener('mouseenter', function () {
+          clearInterval(paused);
+        });
+        this.slides[0].parentNode.addEventListener('mouseleave', function () {
+          paused = setInterval(function () {
+            return _this3.nextSlide();
+          }, 5000);
+        });
       }
     }
   }]);
