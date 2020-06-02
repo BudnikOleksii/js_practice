@@ -101,3 +101,75 @@ const module2 = (function() {
 
 console.log(module2.setVal(4).times(5).devide(2).plus(3).minus(1).pow(2).getNumber());
 
+
+function getFirstAndOther(first, ...other) {
+    return { first, other };
+}
+
+const test = (first, ...other) => ({ first, other });
+console.log(test(2, 3, 5, 6));
+
+
+const organisation = {
+    name: 'Google',
+    info: { employees: ['Vlad', 'Olga'], partners: ['Microsoft', 'Facebook', 'Xing']   }
+};
+  
+function getInfo(
+    {
+        name = 'Unknow',
+        info: { partners: [first = 'none', second = 'none'] = [] } = {}
+    } = {}
+) {
+    console.log(`Name: ${name}`);
+    console.log(`Partners: ${first}, ${second}`);
+}
+  
+getInfo(organisation);
+getInfo();
+
+
+let user = {
+    "guid": "dd969d30-841d-436e-9550-3b0c649e4d34",
+    "isActive": false,
+    "balance": "$2,474.46",
+    "age": 30,
+    "eyeColor": "blue",
+    "name": "Tameka Maxwell",
+    "gender": "female",
+    "company": "ENOMEN",
+    "email": "tamekamaxwell@enomen.com",
+    "phone": "+1 (902) 557-3898",
+    "tags": [
+        "aliquip",
+        "anim",
+        "exercitation",
+        "non",
+    ],
+    "friends": [
+        {
+            "id": 0,
+            "name": "Barber Hicks"
+        },
+        {
+            "id": 1,
+            "name": "Santana Cruz"
+        },
+        {
+            "id": 2,
+            "name": "Leola Cabrera"
+        }
+    ]
+  };
+
+  const {
+    name = 'name',
+    email = 'email',
+    balance = 'balance',
+    tags: [firstTag = 'firstTag', , , lastTag = 'lastTag'] = [],
+    friends: [{ name: friendName = '' }] = []
+  } = user;
+
+  console.log(name, email, balance, firstTag, lastTag, friendName);
+
+  const newArr = [...user.tags, ...user.friends];
