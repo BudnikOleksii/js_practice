@@ -109,6 +109,12 @@ function getFirstAndOther(first, ...other) {
 const test = (first, ...other) => ({ first, other });
 console.log(test(2, 3, 5, 6));
 
+function showFirstAndOther(x, ...args) {
+    let args1 = { first: x, other: [...args] };
+    console.log(args1);
+}
+console.log(showFirstAndOther(2, 3, 5, 6));
+
 
 const organisation = {
     name: 'Google',
@@ -160,16 +166,16 @@ let user = {
             "name": "Leola Cabrera"
         }
     ]
-  };
+};
 
-  const {
+const {
     name = 'name',
     email = 'email',
     balance = 'balance',
     tags: [firstTag = 'firstTag', , , lastTag = 'lastTag'] = [],
     friends: [{ name: friendName = '' }] = []
-  } = user;
+} = user;
 
-  console.log(name, email, balance, firstTag, lastTag, friendName);
+console.log(name, email, balance, firstTag, lastTag, friendName);
 
-  const newArr = [...user.tags, ...user.friends];
+const newArr = [...user.tags, ...user.friends];
