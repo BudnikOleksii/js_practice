@@ -61,8 +61,8 @@ const newsService = (function() {
     const apiUrl = 'https://news-api-v2.herokuapp.com';
 
     return {
-        topHeadlines(country = 'ua', cb) {
-            http.get(`${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`, cb);
+        topHeadlines(country = 'ua', category = 'main', cb) {
+            http.get(`${apiUrl}/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`, cb);
         },
         everything(querry, cb) {
             http.get(`${apiUrl}/everything?q=${querry}&apiKey=${apiKey}`, cb);
@@ -73,6 +73,7 @@ const newsService = (function() {
 // Elements
 const form = document.forms['newsControls'],
       countrySelect = form.elements['country'],
+      categorySelect = form.elements['category'],
       searchInput = form.elements['search'];
 
 form.addEventListener('submit', (e) => {
@@ -90,10 +91,11 @@ function loadNews() {
     showLoader();
     
     const country = countrySelect.value,
+          category = categorySelect.value,
           searchText = searchInput.value;
 
     if (!searchText) {
-        newsService.topHeadlines(country, onGetResponse);
+        newsService.topHeadlines(country, category, onGetResponse);
     } else {
         newsService.everything(searchText, onGetResponse);
     }
@@ -102,13 +104,14 @@ function loadNews() {
 
 function onGetResponse(err, res) {
     removePreloader();
+    
     if (err) {
         showAlert(err, 'error-msg');
         return;
     }
 
     if (!res.articles.length) {
-        // show empty message
+        showAlert('There are no results found');
         return;
     }
 
