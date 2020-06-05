@@ -6,16 +6,16 @@ function customHttp() {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', url);
             xhr.addEventListener('load', () => {
-            if (Math.floor(xhr.status / 100) !== 2) {
-                cb(`Error. Status code: ${xhr.status}`, xhr);
-                return;
-            }
-            const response = JSON.parse(xhr.responseText);
-            cb(null, response);
+                if (Math.floor(xhr.status / 100) !== 2) {
+                    cb(`Error. Status code: ${xhr.status}`, xhr);
+                    return;
+                }
+                const response = JSON.parse(xhr.responseText);
+                cb(null, response);
             });
 
             xhr.addEventListener('error', () => {
-            cb(`Error. Status code: ${xhr.status}`, xhr);
+                cb(`Error. Status code: ${xhr.status}`, xhr);
             });
 
             xhr.send();
@@ -28,16 +28,16 @@ function customHttp() {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', url);
             xhr.addEventListener('load', () => {
-            if (Math.floor(xhr.status / 100) !== 2) {
-                cb(`Error. Status code: ${xhr.status}`, xhr);
-                return;
-            }
-            const response = JSON.parse(xhr.responseText);
-            cb(null, response);
+                if (Math.floor(xhr.status / 100) !== 2) {
+                    cb(`Error. Status code: ${xhr.status}`, xhr);
+                    return;
+                }
+                const response = JSON.parse(xhr.responseText);
+                cb(null, response);
             });
 
             xhr.addEventListener('error', () => {
-            cb(`Error. Status code: ${xhr.status}`, xhr);
+                cb(`Error. Status code: ${xhr.status}`, xhr);
             });
 
             if (headers) {
@@ -104,7 +104,7 @@ function loadNews() {
 
 function onGetResponse(err, res) {
     removePreloader();
-    
+
     if (err) {
         showAlert(err, 'error-msg');
         return;
