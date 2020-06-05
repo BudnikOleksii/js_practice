@@ -2,6 +2,7 @@ import '../css/style.css';
 import './plugins';
 import locations from './store/locations';
 import formUI from './views/form';
+import ticketsUI from './views/tickets';
 import currencyUI from './views/currency';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
               currency = currencyUI.currencyValue;
 
         // CityCode, CityCode, 2020-06, 2020-07
-        console.log(origin, destination, depart_date, return_date);
         await locations.fetchTickts({
             origin,
             destination,
@@ -37,5 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return_date,
             currency
         });
+
+        console.log(locations.lastSearch);
+        ticketsUI.renderTickets(locations.lastSearch);
     }
 });
