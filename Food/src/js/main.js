@@ -89,4 +89,50 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     
     setClock('.timer', deadline);
+
+    // Modal
+    const modalTriger = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal');
+
+    let modalTimerId = setInterval(openModal, 60000);
+
+    function openModal() {
+        modal.classList.remove('hide');
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        if (modalTimerId) {
+            clearInterval(modalTimerId);
+        }
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        document.body.style.overflow = '';
+    }
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+
+    modalTriger.forEach(item => {
+        item.addEventListener('click', openModal);
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.getAttribute('data-close') == '') {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    window.addEventListener('scroll', showModalByScroll);
 });
