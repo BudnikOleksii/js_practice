@@ -1,5 +1,9 @@
 'use strict';
 
+// if babel core doesn't help
+require('es6-promise').polyfill();
+import 'nodelist-foreach-polyfill';
+
 import tabs from'./modules/tabs';
 import modal from'./modules/modal';
 import timer from'./modules/timer';
