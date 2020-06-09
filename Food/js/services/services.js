@@ -1,4 +1,4 @@
-const postData = async (url, data) => {
+async function postData (url, data) {
     let res = await fetch(url, {
         method: "POST",
         headers: {
@@ -8,7 +8,7 @@ const postData = async (url, data) => {
     });
 
     return await res.json();
-};
+}
 
 async function getResource(url) {
     let res = await fetch(url);
