@@ -10,6 +10,7 @@ import { getNews } from './services/news.service';
 
 const { form, inputEmail, inputPassword } = UI;
 const inputs = [inputEmail, inputPassword];
+
 // Events
 form.addEventListener('submit', (e) => {
     e.preventDefault();
