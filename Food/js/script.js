@@ -1,35 +1,39 @@
-'use strict';
+window.addEventListener('DOMContentLoaded', () => {
+    // Tabs
+    const tabsParrent = document.querySelector('.tabheader__items'),
+          tabs = tabsParrent.querySelectorAll('.tabheader__item'),
+          tabsContent = document.querySelectorAll('.tabcontent');
 
-// if babel core doesn't help
-require('es6-promise').polyfill();
-import 'nodelist-foreach-polyfill';
+    function hideTabContent() {
+        tabsContent.forEach(item => {
+            item.classList.add('hide');
+            item.classList.remove('show', 'fade');
+        });
 
-import tabs from'./modules/tabs';
-import modal from'./modules/modal';
-import timer from'./modules/timer';
-import cards from'./modules/cards';
-import calc from'./modules/calc';
-import forms from'./modules/forms';
-import slider from'./modules/slider';
-import {openModal} from './modules/modal';
+        tabs.forEach(tab => {
+            tab.classList.remove('tabheader__item_active');
+        });
+    }
 
-window.addEventListener('DOMContentLoaded', function() {
-    const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 60000);
+    function showTabContent(i = 0) {
+        tabsContent[i].classList.add('show', 'fade');
+        tabsContent[i].classList.remove('hide');
+        tabs[i].classList.add('tabheader__item_active');
+    }
 
-    tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
-    modal('[data-modal]', '.modal', modalTimerId);
-    timer('.timer', '2020-06-11');
-    cards();
-    calc();
-    forms('form', modalTimerId);
-    slider({
-        container: '.offer__slider',
-        nextArrow: '.offer__slider-next',
-        prevArrow: '.offer__slider-prev',
-        slide: '.offer__slide',
-        totalCounter: '#total',
-        currentCounter: '#current',
-        wrapper: '.offer__slider-wrapper',
-        field: '.offer__slider-inner'
+    hideTabContent();
+    showTabContent();
+
+    tabsParrent.addEventListener('click', (event) => {
+        const target = event.target;
+
+        if (target && target.classList.contains('tabheader__item')) {
+            tabs.forEach((item, i) => {
+                if (target == item) {
+                    hideTabContent();
+                    showTabContent(i);
+                }
+            });
+        }
     });
 });
