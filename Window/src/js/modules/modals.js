@@ -1,3 +1,13 @@
+const closeModal = (windows, modal) => {
+    windows.forEach(item => {
+        item.style.display = 'none';
+    });
+
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+    // document.body.classList.remove('modal-open');
+};
+
 const modals = () => {
     function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
         const trigger = document.querySelectorAll(triggerSelector),
@@ -22,24 +32,12 @@ const modals = () => {
         });
 
         close.addEventListener('click', () => {
-            windows.forEach(item => {
-                item.style.display = 'none';
-            });
-
-            modal.style.display = "none";
-            document.body.style.overflow = "";
-            // document.body.classList.remove('modal-open');
+            closeModal(windows, modal);
         });
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal && closeClickOverlay) {
-                windows.forEach(item => {
-                    item.style.display = 'none';
-                });
-
-                modal.style.display = "none";
-                document.body.style.overflow = ""; 
-                // document.body.classList.remove('modal-open');
+                closeModal(windows, modal);
             }
         });
     }
@@ -60,3 +58,4 @@ const modals = () => {
 };
 
 export default modals;
+export { closeModal };

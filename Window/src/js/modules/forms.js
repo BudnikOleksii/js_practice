@@ -1,8 +1,11 @@
 import checkNumInputs from './checkNumInputs';
+import { closeModal } from './modals';
 
 const forms = (state) => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input');
+          inputs = document.querySelectorAll('input'),
+          modal = document.querySelector('.popup_calc_end'),
+          windows = document.querySelectorAll('[data-modal]');
 
     checkNumInputs('input[name="user_phone"]');
 
@@ -51,8 +54,12 @@ const forms = (state) => {
                 .catch(() => statusMessage.textContent = message.failure)
                 .finally(() => {
                     clearInputs();
+                    for (let key in state) {
+                        delete state[key];
+                    }
                     setTimeout(() => {
                         statusMessage.remove();
+                        closeModal(windows, modal);
                     }, 5000);
                 });
         });
