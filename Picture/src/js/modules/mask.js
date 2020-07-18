@@ -1,5 +1,10 @@
 const mask = (selector) => {
     let setCursorPosition = (pos, elem) => {
+        // change start position 
+		elem.addEventListener('click', () => {
+			elem.selectionStart = elem.selectionEnd = elem.value.length;
+        });
+        
         elem.focus();
 
         if (elem.setSelectionRange) {
