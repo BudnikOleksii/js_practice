@@ -25,18 +25,13 @@ export default class MiniSlider extends Slider {
     }
 
     nextSlide() {
-        if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
-            this.container.appendChild(this.slides[0]);
-            this.container.appendChild(this.slides[1]);
-            this.container.appendChild(this.slides[2]);
-            this.decorizeSlides();
-        } else if (this.slides[1].tagName == "BUTTON") {
-            this.container.appendChild(this.slides[0]);
-            this.container.appendChild(this.slides[1]);
-            this.decorizeSlides();
-        } else {
-            this.container.appendChild(this.slides[0]);
-            this.decorizeSlides();
+        for (let i = this.slides.length - 1; i > 0; i--) {
+            if (this.slides[i].tagName !== "BUTTON") {
+                let active = this.slides[0];
+                this.container.insertBefore(active, this.slides[i]);
+                this.decorizeSlides();
+                break;
+            }
         }
     }
 
@@ -67,7 +62,13 @@ export default class MiniSlider extends Slider {
         this.decorizeSlides();
 
         if (this.autoplay) {
-            setInterval(() => this.nextSlide(), 5000);
+            let paused = setInterval(() => this.nextSlide(), 5000);
+            this.slides[0].parentNode.addEventListener('mouseenter', () => {
+                clearInterval(paused);
+            });
+            this.slides[0].parentNode.addEventListener('mouseleave', () => {
+                paused = setInterval(() => this.nextSlide(), 5000);
+            });
         }
     }
 }
