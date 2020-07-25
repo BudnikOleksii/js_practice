@@ -8,8 +8,12 @@ $('div').click(function() {
     console.log($(this).index());
 });
 
+$('button').fadeIn(1800);
+
 // console.log($('div').eq(2).find('.some'));
 // console.log($('.some').closestElem('.findmeq').addClass('dgdg'));
-console.log($('.findme').siblings());
+$('button').on('click', function() {
+    $(this).fadeOut(1800);
+});
 
 // console.log($('div').html('hello'));
