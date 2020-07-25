@@ -2,11 +2,11 @@ import $ from '../core';
 
 $.prototype.addClass = function(...classNames) {
     for (let i = 0; i < this.length; i++) {
-        if (!this[i].classList) {
+        if (!this[i]) {
             continue;
+        } else {
+            this[i].classList.add(...classNames);
         }
-        
-        this[i].classList.add(...classNames);
     }
 
     return this;
@@ -14,11 +14,11 @@ $.prototype.addClass = function(...classNames) {
 
 $.prototype.removeClass = function(...classNames) {
     for (let i = 0; i < this.length; i++) {
-        if (!this[i].classList) {
+        if (!this[i]) {
             continue;
+        } else {
+            this[i].classList.remove(...classNames);
         }
-        
-        this[i].classList.remove(...classNames);
     }
 
     return this;
@@ -26,11 +26,11 @@ $.prototype.removeClass = function(...classNames) {
 
 $.prototype.toggleClass = function(classNames) {
     for (let i = 0; i < this.length; i++) {
-        if (!this[i].classList) {
+        if (!this[i]) {
             continue;
+        } else {
+            this[i].classList.toggle(classNames);
         }
-        
-        this[i].classList.toggle(classNames);
     }
 
     return this;
