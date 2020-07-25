@@ -10,8 +10,8 @@ In this project I practiced how to...:
 - work in different pages with same script
 ---
 Also I:
-- [x] had expirience how to use try/catch for avoid errors
-- [x] updated some moduls with new features
+- [x] had expirience how to use try/catch to avoid errors
+- [x] updated some modules with new features
 - [x] have done interesting homework
 - [x] understand when we need use 'stopPropagation'
 - [x] worked with different slider types

@@ -14,7 +14,7 @@ Also worked with other modules like:
 - validation mask for inputs
 - picture resizing
 - scrolling for links
-- fileters
+- filters
 - drag & drop component
 ----
 I have done this project with homework where I updated:
