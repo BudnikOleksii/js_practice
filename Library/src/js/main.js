@@ -1,19 +1,13 @@
 import './lib/lib';
 
-$('button').on('click', function() {
-    $('div').eq(2).toggleClass('active');
+$('#first').click(() => {
+    $('div').eq(1).fadeToggle(800);
 });
 
-$('div').click(function() {
-    console.log($(this).index());
+$('[data-count="second"]').click(() => {
+    $('div').eq(2).fadeToggle(800);
 });
 
-$('button').slideIn(1800);
-
-// console.log($('div').eq(2).find('.some'));
-// console.log($('.some').closestElem('.findmeq').addClass('dgdg'));
-$('button').on('click', function() {
-    $(this).slideOut(1800);
+$('button').eq(2).click(() => {
+    $('.w-500').fadeToggle(800);
 });
-
-// console.log($('div').html('hello'));
