@@ -2,6 +2,7 @@ import '../css/style.css';
 import './plugins';
 import locations from './store/locations';
 import formUI from './views/form';
+import ticketsUI from './views/tickets';
 import currencyUI from './views/currency';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,19 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function onFormSubmit() {
         // data from inputs
-        const origin = locations.getCityCodeByKey(formUI.originValue);
-        const destination = locations.getCityCodeByKey(formUI.destinationValue);
-        const depart_date = formUI.departDateValue;
-        const return_date = formUI.returnDateValue;
-        const currency = currencyUI.currencyValue;
+        const origin = locations.getCityCodeByKey(formUI.originValue),
+              destination = locations.getCityCodeByKey(formUI.destinationValue),
+              depart_date = formUI.departDateValue,
+              return_date = formUI.returnDateValue,
+              currency = currencyUI.currencyValue;
 
-        console.log(origin, destination, depart_date, return_date);
-        await locations.fetchTickets({
+        // CityCode, CityCode, 2020-06, 2020-07
+        await locations.fetchTickts({
             origin,
             destination,
             depart_date,
             return_date,
             currency
         });
+
+        console.log(locations.lastSearch);
+        ticketsUI.renderTickets(locations.lastSearch);
     }
 });
