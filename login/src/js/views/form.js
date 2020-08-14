@@ -13,6 +13,7 @@ function inputErrorTemplate(msg) {
  * @param {HTMLInputElement} el 
  */
 export function showInputError(el) {
+    // Bootstrap notification
     const parent = el.parentElement;
     const msg = el.dataset.invalidMessage || 'Invalid input';
     const template = inputErrorTemplate(msg);
